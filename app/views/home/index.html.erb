@@ -2,6 +2,15 @@
   <h1>Welcome to Our Real Estate Agency</h1>
   <p>Your dream property is just a click away!</p>
 
+      <% if user_signed_in? %>
+      <%= link_to 'Profile', user_path(current_user), class: 'btn btn-primary' %>
+      <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+    <% else %>
+      <%= link_to 'Login', new_user_session_path, class: 'btn btn-primary' %>
+      <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-success' %>
+    <% end %>
+
+
   <div class="mt-4">
     <%= link_to 'Agent Directory', agents_path, class: 'btn btn-primary btn-lg mx-2' %>
     <%= link_to 'Property Listings', properties_path, class: 'btn btn-secondary btn-lg mx-2' %>

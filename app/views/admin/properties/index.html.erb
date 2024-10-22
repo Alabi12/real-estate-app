@@ -1,0 +1,27 @@
+<h1>Manage Properties</h1>
+
+<%= link_to 'Add New Property', new_admin_property_path, class: 'btn btn-success' %>
+
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Location</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @properties.each do |property| %>
+      <tr>
+        <td><%= property.name %></td>
+        <td>$<%= property.price %></td>
+        <td><%= property.location %></td>
+        <td>
+          <%= link_to 'Edit', edit_admin_property_path(property), class: 'btn btn-primary' %>
+          <%= link_to 'Delete', admin_property_path(property), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
