@@ -1,0 +1,39 @@
+<section class="container mt-5">
+  <h1>Featured Properties</h1>
+
+  <%= form_with url: search_properties_path, method: :get, local: true do |form| %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= form.label :search, "Search by Location" %>
+        <%= form.text_field :search, class: "form-control", placeholder: "Enter location" %>
+      </div>
+
+      <div class="col-md-4">
+        <%= form.label :sort_by, 'Sort By' %>
+        <!-- Ensure that the form.select syntax is correct -->
+        <%= form.select :sort_by, [["Price: Low to High", "asc"], ["Price: High to Low", "desc"]], { include_blank: true }, class: "form-control" %>
+      </div>
+
+      <div class="col-md-2">
+        <%= form.submit 'Search', class: "btn btn-primary mt-3" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row mt-5">
+    <% @properties.each do |property| %>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <%= image_tag(property.images.first, class: 'card-img-top') if property.images.any? %>
+          <div class="card-body">
+            <h5 class="card-title"><%= property.name %></h5>
+            <p class="card-text">$<%= property.price %> - <%= property.location %></p>
+            <%= link_to 'View Details', property_path(property), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= paginate @properties %>
+</section>

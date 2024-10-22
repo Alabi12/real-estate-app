@@ -1,0 +1,17 @@
+<section class="container mt-5">
+  <h1>Agents</h1>
+  <div class="row mt-4">
+    <% @agents.each do |agent| %>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <%= image_tag agent.photo.variant(resize_to_limit: [300, 300]).processed, class: 'card-img-top' if agent.photo.attached? %>
+          <div class="card-body">
+            <h5 class="card-title"><%= agent.name %></h5>
+            <p class="card-text"><%= agent.contact_information %></p>
+            <%= link_to 'View Listings', agent_path(agent), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>
